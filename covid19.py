@@ -5,13 +5,14 @@ import requests
 import time
 
 #country = "USA"
-city = input("City to check: ")  
-city = city.title()
-
+country = input("Country to check: ") 
+#city=input("What city to check: ") 
 notification_duration = 10
 refresh_time = 10 #minutes
 data_check= []
-worldmetersLink = "https://www.worldometers.info/coronavirus/country/us"
+worldmetersLink = "https://www.worldometers.info/coronavirus/"
+#world_usa_city=(f"https://www.worldometers.info/coronavirus/country/{country.lower()}")
+#print(world_usa_city)
 
 def data_cleanup(array):
     L = []
@@ -35,7 +36,7 @@ while True:
     search = bs.select("div tbody tr td")
     start = -1
     for i in range(len(search)):
-        if search[i].get_text().find(city) !=-1:
+        if search[i].get_text().find(country) !=-1:
             start = i
             break
     data = []
@@ -53,7 +54,7 @@ while True:
         data_check = data
         #toaster = ToastNotifier()
         #toaster.show_toast("Coronavirus {}".format(country) , message, duration = notification_duration , icon_path ="icon.ico")
-        print("\nCoronavirus {}".format(city) , message,)
+        print("Coronavirus {}".format(country) , message,)
     
     else:
         time.sleep(refresh_time*60)
